@@ -16,7 +16,7 @@
 </head>
 
 <body class="text-bg-dark">
-    <div class="px-4 py-5 my-5 text-center">
+    <div class="p-4 mt-5 text-center">
         <h1 class="display-5 fw-bold">🧁 Bakery Finder</h1>
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">Need to find a bakery in a hurry? Here's a list of bakeries in your local area</p>
@@ -24,21 +24,22 @@
     </div>
     <div class="container">
         {% for bakery in bakeries %}
-            <div>
-                <h2>{{ bakery.name }}</h2>
-                <p>{{ bakery.address|linebreaksbr }}</p>
-                <p>Rating ⭐: {{ bakery.rating }}</p>
-                <img src="{{ bakery.image }}"/>
-                <ol>
-                    {% for item in bakery.item_set.all %}
-                        <ul>
-                            {{ item.name }}: ${{ item.price }}
-                            <div>
-                                <img src="{{ item.image }}"/>
-                            </div>
-                        </ul>
-                    {% endfor %}
-                </ol>
+            <div class="row py-4">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <h2>{{ bakery.name }}</h2>
+                    <p class="fs-5">{{ bakery.cuisine }}</p>
+                    <p>{{ bakery.address|linebreaksbr }}</p>
+                    <p>Rating ⭐: {{ bakery.rating }}</p>
+                    <ol class="list-group list-group-flush">
+                        {% for item in bakery.item_set.all %}
+                            <ul class="list-group-item list-group-item-dark list-group-item-action">
+                                {{ item.name }}: ${{ item.price }}
+                            </ul>
+                        {% endfor %}
+                    </ol>
+                </div> 
+                <div class="col-md-4"></div>
             </div>
         {% endfor %}
     </div>
